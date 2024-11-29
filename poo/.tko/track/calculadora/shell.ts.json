@@ -1,0 +1,20 @@
+{
+    "patches": [
+        {
+            "label": "2024-11-29_17-01-38",
+            "content": "@@ -211,21 +211,16 @@\n 0;%0A    %7D\n-%0A    \n %0A%0A    ch\n@@ -1008,24 +1008,33 @@\n  %7D%0A        %0A\n+        %0A\n         toSt\n@@ -1072,18 +1072,19 @@\n urn \n-%60\n display\n+ \n = \n+%60\n $%7Bth\n@@ -1144,26 +1144,16 @@\n        %7D\n- %0A        \n %0A    %7D%0A%0A\n"
+        },
+        {
+            "label": "2024-11-29_17-03-58",
+            "content": "@@ -1072,17 +1072,16 @@\n %60display\n- \n = $%7Bthis\n"
+        },
+        {
+            "label": "2024-11-29_17-04-17",
+            "content": "@@ -313,17 +313,17 @@\n battery \n-%3E\n+%3C\n  this.ba\n"
+        },
+        {
+            "label": "2024-11-29_17-05-29",
+            "content": "class Calculator{\n    battery: number;\n    batteryMax: number;\n    display: number;\n\n\n    constructor(batteryMax: number){\n        this.battery = 0;\n        this.batteryMax = batteryMax;\n        this.display = 0;\n    }\n    \n\n    chargeBattery(value: number): void{\n        this.battery += value;\n        if(this.battery > this.batteryMax){\n            this.battery = this.batteryMax\n        }\n\n    } \n    useBattery():boolean{\n        if (this.battery > 0) {\n            this.battery -= 1;\n            return true;\n          }\n          console.log(\"fail: bateria insuficiente\");\n          return false;\n        }\n\n        sum(a: number, b: number): void {\n          if (this.useBattery()) {\n            this.display = a + b;\n          }\n        }\n\n        division(a: number, b: number): void {\n          if (!this.useBattery()) {\n            return;\n          }\n          if (b === 0) {\n            console.log(\"fail: divisao por zero\");\n          } else {\n            this.display = a / b;\n          }\n        }\n        \n        toString(): string{\n            return `display = ${this.display.toFixed(2)}, battery = ${this.battery}`;\n        } \n        \n    }\n\n\n\nclass Adapter {\n    calc: Calculator = new Calculator(0);\n    public init(batteryMax: number): void {\n            this.calc = new Calculator(batteryMax);\n    }\n\n    public show(): void {\n            console.log(this.calc.toString());\n    }\n\n    public charge(value: number): void {\n            this.calc.chargeBattery(value);\n    }\n\n    public sum(a: number, b: number): void {\n            this.calc.sum(a, b);\n    }\n\n    public div(a: number, b: number): void {\n            this.calc.division(a, b);\n    }\n}\n\n\nfunction input(): string { let X: any = input; X.L = X.L || require(\"fs\").readFileSync(0).toString().split(/\\r?\\n/); return X.L.shift(); } // _TEST_ONLY_\n// function input(): string { let X: any = input; X.P = X.P || require(\"readline-sync\"); return X.P.question() } // _FREE_ONLY_\nfunction write(text: any, endl=\"\\n\") { process.stdout.write(\"\" + text + endl); }\n\nfunction main() {\n    let adp: Adapter = new Adapter();\n\n    while (true) {\n        write(\"$\", \"\");\n        let line = input();\n        write(line); // _TEST_ONLY_\n        let args = line.split(\" \");\n\n        if      (args[0] == \"show\"  ) { adp.show();                                  }\n        else if (args[0] == \"init\"  ) { adp.init(+args[1]);                          }\n        else if (args[0] == \"charge\") { adp.charge(+args[1]);                        }\n        else if (args[0] == \"sum\"   ) { adp.sum(+args[1], +args[2]);                 }\n        else if (args[0] == \"div\"   ) { adp.div(+args[1], +args[2]);                 }\n        else if (args[0] == \"end\"   ) { break;                                       }\n        else                          { console.log(\"fail: comando nao encontrado\"); }\n    }\n}\n\nmain()\n"
+        }
+    ]
+}

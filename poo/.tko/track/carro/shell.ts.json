@@ -1,0 +1,28 @@
+{
+    "patches": [
+        {
+            "label": "2024-11-27_20-01-48",
+            "content": "@@ -1691,16 +1691,19 @@\n er %7B%0A   \n+ //\n  car: Ca\n@@ -1737,32 +1737,35 @@\n : void %7B%0A       \n+ //\n  this.car.enter(\n@@ -1793,32 +1793,35 @@\n : void %7B%0A       \n+ //\n  this.car.leave(\n@@ -1859,32 +1859,35 @@\n : void %7B%0A       \n+ //\n  this.car.fuel(g\n@@ -1931,24 +1931,27 @@\n id %7B%0A       \n+ //\n  this.car.dr\n@@ -1988,24 +1988,27 @@\n id %7B%0A       \n+ //\n  console.log\n"
+        },
+        {
+            "label": "2024-11-27_20-02-26",
+            "content": "@@ -374,20 +374,19 @@\n %0A%0Aclass \n-C\n+c\n ar\n- \n %7B%0A    ga\n"
+        },
+        {
+            "label": "2024-11-27_20-03-27",
+            "content": "@@ -1643,17 +1643,16 @@\n as%7D, km:\n- \n $%7Bthis.k\n"
+        },
+        {
+            "label": "2024-11-27_20-03-42",
+            "content": "@@ -660,16 +660,17 @@\n  de pess\n+s\n oas atin\n"
+        },
+        {
+            "label": "2024-11-27_20-04-14",
+            "content": "@@ -740,9 +740,9 @@\n ass \n-%3E\n+%3C\n  0)%7B\n"
+        },
+        {
+            "label": "2024-11-27_20-07-16",
+            "content": "function input(): string { let X: any = input; X.L = X.L || require(\"fs\").readFileSync(0).toString().split(/\\r?\\n/); return X.L.shift(); } // _TEST_ONLY_\n// function input(): string { let X: any = input; X.P = X.P || require(\"readline-sync\"); return X.P.question() } // _FREE_ONLY_\nfunction write(text: any, endl=\"\\n\") { process.stdout.write(\"\" + text + endl); }\nexport {};\n\nclass Car {\n    gas : number;\n    km : number;\n    pass : number;\n\n    constructor(){\n        this.gas = 0;\n        this.km = 0;\n        this.pass = 0;\n    }\n\n    enter(): void{\n        if(this.pass < 2){\n            this.pass +=1;\n        }else{\n            console.log(\"fail: limite de pessoas atingido\")\n        }\n    }\n    \n    leave(): void{\n        if(this.pass > 0){\n            this.pass -=1;\n        } else {\n            console.log(\"fail: nao ha ninguem no carro\")\n        }\n    }\n    fuel(gas:number): void{\n        if((this.gas + gas) < 100){\n            this.gas += gas;\n        } else {\n            this.gas = 100;\n        }\n    }\n    drive(km: number): void{\n        if(this.gas <= 0){\n            console.log(\"fail: tanque vazio\")\n        } else if(this.pass <=0){\n            console.log(\"fail: nao ha ninguem no carro\")\n        } else {\n            if((this.gas-km)<=0){\n                var kmT:number = this.gas;\n                console.log(`fail: tanque vazio apos andar ${kmT} km`);\n                this.km += this.gas;\n                this.gas = 0;\n            } else{\n                this.km += km;\n                this.gas -= km;\n            }\n        }\n\n        }\n        toString(): string{\n        return `pass: ${this.pass}, gas: ${this.gas}, km: ${this.km}`\n    }\n}\n\n\n\n\n\n\n\n\n\n\nclass Adapter {\n    car: Car = new Car();\n\n    enter(): void {\n        this.car.enter();\n    }\n\n    leave(): void {\n        this.car.leave();\n    }\n\n    fuel(gas: number): void {\n        this.car.fuel(gas);\n    }\n\n    drive(km: number): void {\n        this.car.drive(km);\n    }\n\n    show(): void {\n        console.log(this.car.toString());\n    }\n}\n\nfunction main() {\n    let adp = new Adapter();\n\n    while (true) {\n        write(\"$\", \"\");\n        let line = input();\n        write(line); // _TEST_ONLY_\n        let args = line.split(\" \");\n\n        if      (args[0] === \"show\")  { adp.show();                     }\n        else if (args[0] === \"enter\") { adp.enter();                    }\n        else if (args[0] === \"leave\") { adp.leave();                    }\n        else if (args[0] === \"fuel\")  { adp.fuel(+args[1]);             }\n        else if (args[0] === \"drive\") { adp.drive(+args[1]);            }\n        \n        else if (args[0] === \"end\")   { break;                          }\n        else                          { write(\"fail: comando invalido\");}\n    }\n}\n\nmain()\n"
+        }
+    ]
+}
